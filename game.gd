@@ -17,22 +17,22 @@ func _ready():
 	for _y in range(range_y):
 		for x in range(range_x):
 			if x == range_x-1:
-				pos_y=block_size+base(count)-margin
+				pos_y=block_size+base()-margin
 				pos_x=0
 				initial=true
 			else:
-				base(count)
+				base()
 				initial=false
 			count+=1
 	#rename_blocks()
 	draw_complete = true
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	if draw_complete:
 		randomize()
 		block_names[randi() % range_x*range_y].get_child(0).color = ColorN(color_arr[randi() % 6])
 		#issue here
-func base(count):
+func base():
 	block_names.append(base_block.instance())
 	add_child(block_names[count])
 	if initial:
