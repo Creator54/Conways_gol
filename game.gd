@@ -24,14 +24,13 @@ func _ready():
 				base(count)
 				initial=false
 			count+=1
-	rename_blocks()
+	#rename_blocks()
 	draw_complete = true
-	#for i in range(len(block_names)):
-	#	print(block_names[i])
 	
-#func _physics_process(delta):
+func _physics_process(delta):
 	if draw_complete:
-		block_names[randi() % range_x*range_y].ColorRect.color = ColorN(color_arr[randi() % 6])
+		randomize()
+		block_names[randi() % range_x*range_y].get_child(0).color = ColorN(color_arr[randi() % 6])
 		#issue here
 func base(count):
 	block_names.append(base_block.instance())
