@@ -11,7 +11,8 @@ var range_x = 174
 var range_y = 96
 var block_names=[]
 var count = 0
-
+var color_arr = ['VIOLET','LIGHT BLUE','GREEN','YELLOW','ORANGE','RED']
+var draw_complete = false
 func _ready():
 	for _y in range(range_y):
 		for x in range(range_x):
@@ -23,7 +24,14 @@ func _ready():
 				base(count)
 				initial=false
 			count+=1
-			
+	rename_blocks()
+	#for i in range(len(block_names)):
+	#	print(block_names[i])
+	
+func _physics_process(delta):
+	if draw_complete:
+		block_names[randi() % range_x*range_y].ColorRect.color = ColorN(color_arr[randi() % 6])
+
 func base(count):
 	block_names.append(base_block.instance())
 	add_child(block_names[count])
@@ -35,3 +43,7 @@ func base(count):
 		block_names[count].position.y=pos_y+gap+margin
 	pos_x=block_names[count].position.x
 	return block_names[count].position.y
+
+func rename_blocks():
+	for i in range(range_x*range_y):
+		block_names[i]=i
